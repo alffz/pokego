@@ -9,7 +9,7 @@ import axios from "axios";
 import App from "./App.vue";
 import router from "./router";
 
-axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
+axios.defaults.baseURL = import.meta.env.VITE_POKEMON_API;
 axios.defaults.headers.common["Content-Type"] = "application/json";
 axios.defaults.headers.common["Accept"] = "application/json";
 
