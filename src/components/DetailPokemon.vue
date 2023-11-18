@@ -5,12 +5,29 @@
         <div class="modal-body">
           <div class="card border border-0 " >
             <div class="card-header border border-0 d-flex justify-content-center">
-              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" class="card-img-top w-50" alt="...">
+              <img :src="pokemon.detailPokemon.image" class="card-img-top w-50" alt="...">
             </div>
             <div class="card-body">
-              <p class="card-text my-0">Ability : manjat  lompat</p>
-              <p class="card-text my-0">Species : elkodoe</p>
-              <p class="card-text my-0">type    : mamlia </p>
+              <table class="table table-sm table-borderless table-striped">
+                <tbody>
+                  <tr >
+                    <th scope="row">Name</th>
+                    <td>{{ pokemon.detailPokemon.name }}</td>
+                  </tr>
+                  <tr >
+                    <th scope="row">Ability</th>
+                    <td>{{ pokemon.detailPokemon.ability }}</td>
+                  </tr>
+                  <tr >
+                    <th scope="row">Species</th>
+                    <td colspan="2">{{ pokemon.detailPokemon.species }}</td>
+                  </tr>
+                  <tr >
+                    <th scope="row">Type</th>
+                    <td colspan="2">{{ pokemon.detailPokemon.type }}</td>
+                  </tr>
+                </tbody>
+              </table>
               <p class="text text-primary" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 load More
               </p>
@@ -19,23 +36,26 @@
                   <tbody>
                     <tr >
                       <th scope="row">Hp</th>
-                      <td>90</td>
+                      <td>{{ pokemon.detailPokemon.hp }}</td>
                     </tr>
                     <tr >
                       <th scope="row">Attacek</th>
-                      <td>80</td>
+                      <td>{{ pokemon.detailPokemon.attack }}</td>
                     </tr>
                     <tr >
                       <th scope="row">defense</th>
-                      <td colspan="2">20</td>
+                      <td colspan="2">{{ pokemon.detailPokemon.defense }}</td>
                     </tr>
                     <tr >
                       <th scope="row">special Attacek</th>
-                      <td colspan="2">20</td>
+                      <td colspan="2">{{ pokemon.detailPokemon.special_attack }}</td>
                     </tr>
                     <tr >
                       <th scope="row">special defense</th>
-                      <td colspan="2">20</td>
+                      <td colspan="2">{{ pokemon.detailPokemon.special_defense }}</td>
+                    </tr><tr >
+                      <th scope="row">speed</th>
+                      <td colspan="2">{{ pokemon.detailPokemon.speed}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -51,3 +71,9 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { usePokemon } from '../stores/pokemon.js';
+
+const pokemon = usePokemon()
+</script>
