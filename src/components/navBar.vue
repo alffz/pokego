@@ -1,12 +1,10 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 
-defineProps({
-  msg: {
-    type: String,
-    required: true
-  }
-})
+import { usePokemon } from '../stores/pokemon.js';
+
+const pokemon = usePokemon()
+
 </script>
 
 <template>
@@ -25,7 +23,7 @@ defineProps({
         </li>
       </ul>
       <ul class="navbar-nav mb-2 mb-lg-0" role="search">
-        <li class="nav-item "><a class="nav-link text-white" >User</a></li>
+        <li class="nav-item "><a class="nav-link text-white" >{{ pokemon.user }}</a></li>
       </ul>
     </div>
   </div>
