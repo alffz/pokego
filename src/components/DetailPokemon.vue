@@ -63,8 +63,8 @@
             </div>
           </div>
           <div class="my-1 px-3 py-1">
-            <span type="button" class="mx-3"><i class="bi bi-heart-fill text-danger"></i></span>
-            <span type="button"  data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></span>
+            <span @click="pokemon.addToFavorite(pokemon.detailPokemon.name)" type="button" class="mx-3"><i :class="{'text-secondary':!pokemon.isFavorite,'text-danger':pokemon.isFavorite}" class="bi bi-heart-fill "></i></span>
+            <span @click="pokemon.isFavorite = false" type="button"  data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></span>
           </div>
         </div>
       </div>
@@ -76,4 +76,5 @@
 import { usePokemon } from '../stores/pokemon.js';
 
 const pokemon = usePokemon()
+
 </script>
