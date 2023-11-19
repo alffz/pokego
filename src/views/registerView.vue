@@ -4,15 +4,28 @@
       <div class="col-md-12 col-sm-12 d-flex justify-content-center align-items-center"> <!--align-items-center not work (not visible) if element dont have width and hight-->
         <form class="w-50">
           <div class="mb-3 ">
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="create username">
+            <input v-model="user" type="email" class="form-control" id="exampleFormControlInput1" placeholder="create username">
           </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button @click="submit()" class="btn btn-primary">Submit</button>
         </form>
       </div>
     </div>
   </div>
 </template>
+<script setup>
+import { usePokemon } from '../stores/pokemon.js';
+import {ref} from 'vue'
+import { useRouter } from 'vue-router';
 
+const pokemon = usePokemon()
+const user = ref()
+const router = useRouter();
+
+const submit = ()=>{
+  pokemon.user = user.value
+  router.push({ path: '/' });
+}
+</script>
 <style scoped>
   .mediumBlue {
     background-color: var(--mediumBlue);;

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import { usePokemon } from "../stores/pokemon.js";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -24,5 +25,9 @@ const router = createRouter({
     },
   ],
 });
-
+router.beforeEach(async (to, from) => {
+  const pokemon = usePokemon();
+  if (!pokemon.user && to.name !== "register") return "/register";
+  if (pokemon.user && to.name === "register") return "/";
+});
 export default router;
