@@ -2,7 +2,7 @@
   <div class="container-fluid darkBlue">
     <div class="row">
       <navBar/>
-    </div>
+  </div>
     <div class="row  mt-1">
       <div class="col-md-6  col-sm-6 ">
         <form class="py-3">
@@ -13,7 +13,7 @@
           <div class="form-check form-check-inline">
             <input @click="showByType()" class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
             <label class="form-check-label" for="inlineRadio1">show by type</label>
-          </div>{{ selectedType }}
+          </div>
           <select @click="getPokemonType()" v-model="selectedType"  :disabled="pokemon.showByType" class="form-select w-75"  aria-label="Default select example">
             <option v-for="{name,url} in pokemonsType" :key="types" :value="url">{{ name }}</option>
           </select>
@@ -23,8 +23,9 @@
     </div>
     <div class="row">
       <div class="col-sm-12 my-1">
-        <button type="button" class="btn btn-sm btn-secondary mx-2">Previous</button>
-        <button type="button" class="btn btn-sm btn-secondary mx-2">Next</button>
+        <button v-if="pokemon.page === 1" type="button" disabled class="btn btn-sm btn-secondary mx-2">Previous</button>
+        <button v-else @click="previous()" type="button" class="btn btn-sm btn-primary mx-2">Previous</button>
+        <button @click="next()" type="button" class="btn btn-sm btn-primary mx-2">Next</button>
       </div>
     </div>
     <div class="row mt-1">
@@ -129,10 +130,21 @@ const getPokemonByType = async ()=>{
     }
     
   }catch(err){
-    console.log(err)
     showAlert({message:"unexpected error",background:'alert-danger'})
   }
   
+}
+
+const next = async ()=>{
+  const url = extractUrl(pokemon.next).at(-1)
+  await pokemon.getPokemon(url)
+  return pokemon.page += 1
+}
+
+const previous = async ()=>{
+  const url = extractUrl(pokemon.previous).at(-1)
+  await pokemon.getPokemon(url)
+  return pokemon.page -= 1
 }
 
 
