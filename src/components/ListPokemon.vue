@@ -1,14 +1,14 @@
 <template>
-  <div v-for="{name,images} in pokemon.pokemons"  class="col-sm-6 col-md-4 col-lg-3 ">
+  <div v-for="{name,images,date = false} in pokemon.pokemons"  class="col-sm-6 col-md-4 col-lg-3 ">
     <div class="card mb-3" >
       <div class="row g-0">
         <div  @click="showDetail(name,images)" class="col-md-4 pointer" data-bs-toggle="modal" data-bs-target="#detailPokemon">
           <img :src="images" class="img-fluid rounded-start" alt="...">
         </div>
         <div class="col-md-8 ">
-          <div class="card-body d-flex justify-content-between">
+          <div class="card-body ">
             <h5 class="card-title"> {{ name }}</h5>
-            <h5 class="card-title"><i class="bi bi-heart-fill text-danger"></i></h5>
+            <p v-if="date">favorited at : {{ date }}</p>
           </div>
         </div>
       </div>
@@ -17,7 +17,6 @@
 </template>
 
 <script setup>
-// import {onBeforeUnmount, onMounted, ref} from 'vue'
 import { showAlert } from '../utils/utils.js';
 import axios from 'axios';
 
@@ -54,7 +53,6 @@ const showDetail = async (name,image)=>{
         special_defense,
         speed
       }
-      console.log(detail)
       pokemon.detailPokemon = detail
     }else{
       showAlert({message:"someting went wrong",background:'alert-warning'})
